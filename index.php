@@ -1,34 +1,31 @@
 <?php 
-	if(isset($_POST['submit']) && !empty($_POST['submit'])){
-
-	}else{
+	if(isset($_POST['tag']) && !empty($_POST['tag'])){
 		require_once('db_functions.php');
+		$tag = $_POST['tag'];
 		$db = new DB_Functions();
-		$email = $_POST['email'];
-		$gender = $_POST['gender'];
 
-		$name = $db->emailToUsername($email);
+		// response Array
+    	$response = array("tag" => $tag, "success" => 0, "error" => 0);
+    	
+    	if($tag == 'register'){
+			$email = $_POST['email'];
+			$gender = $_POST['gender'];
 
-		if($db->storeUser($name,$email,"",$gender)){
-			echo "Success";
+			$name = $db->emailToUsername($email);
+
+			if($db->storeUser($name,$email,"",$gender)){
+				$response['success'] = 1;
+				echo json_encode($response);
+			}else{
+				$response['error'] = 1;
+				$response['error_msg'] = "Error occured in Registration";
+				echo json_encode($response);
+			}
 		}else{
-			echo "Failure";
+			echo "Invalid Request";
 		}
 
- ?>
- <html>
- <head>
- 	<title>tester</title>
- </head>
- <body>
- 	<form action="" method="post">
- 		<input type="email" name="email"></br>
- 		<input type="text" name="gender"></br>
- 		<input type="submit">
- 	</form>
- 
- </body>
- </html>
- <?php
-}
+	}else{
+		echo "Access Denied";
+	}
  ?>
