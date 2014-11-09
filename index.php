@@ -5,7 +5,7 @@
 		$db = new DB_Functions();
 
 		// response Array
-    	$response = array("tag" => $tag, "success" => 0, "error" => 0);
+    	$response = array("tag" => $tag, "success" => 0, "error" => 0, "msg" => "Hello");
     	
     	if($tag == 'register'){
 			$email = $_POST['email'];

@@ -19,6 +19,7 @@
 	    	include_once("config.php");
 	    	$avatar = (empty($avatar))? "avatar" : "$avatar";
 	        $result = mysql_query("INSERT INTO ".PREFIX."users(f_name, l_name, email, avatar_url, gender, rate) VALUES('$name[0]','$name[1]', '$email', '$avatar', '$gender', '')");
+	        //if successful get id of user and insert vehicle details
 	        // check for successful store
 	        return $result;
 	    }
